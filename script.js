@@ -401,6 +401,45 @@ function allSelcetElement(elem){
     pickColor()
 }
 
+// text aligment
+
+// function alignText(){
+//     const aligntext = document.querySelectorAll('.align-text button').forEach((aln) =>{
+//        aln.onclick=()=>{
+//          if (!selectedTextelm) {
+//             return;
+//         }
+
+//         selectedTextelm.style.textAlign = aln.dataset.align
+//        }
+//     })
+
+// }
+
+function alignLeft(){
+    if (!selectedTextelm) {
+        return;
+    }
+     selectedTextelm.style.display = 'block';
+  selectedTextelm.style.textAlign = 'left';
+}
+
+function aligneCenter(){
+    if (!selectedTextelm) {
+        return;
+    }
+    selectedTextelm.style.display = 'block';
+  selectedTextelm.style.textAlign = 'center';
+}
+
+function alignRight(){
+    if (!selectedTextelm) {
+        return;
+    }
+    selectedTextelm.style.display = 'block';
+  selectedTextelm.style.textAlign = 'right';
+}
+
 
 
 
@@ -445,4 +484,7 @@ document.getElementById('rect').addEventListener('click' , createRectangle)
 document.getElementById('frame').addEventListener('click' , creatFrame)
 // calling create text function
 document.getElementById('text').addEventListener('click' , createTextElement)
+document.querySelector('.left' ,alignLeft)
+document.querySelector('.right' ,alignRight)
+document.querySelector('.center' ,aligneCenter)
 openPallet()
