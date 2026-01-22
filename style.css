@@ -155,17 +155,18 @@ main{
 }
 
 
-.info>.layers{
+.layers{
     width: 100%;
     /* height: 100px; */
     background-color: #212121;
     border-radius: 5px;
 }
-.info>.layers>p{
+.layers>p{
     padding: var(--padding);
     font-size: var(--textSizeSmall);
+    color: var(--text);
 }
-.info>.layers>.innerLayers{
+.layers>.innerLayers{
     display: flex;
     justify-content: start;
     flex-direction: column;
@@ -173,17 +174,17 @@ main{
     padding: var(--padding);
     font-size: var(--textSizeSmall);
 }
-.info>.layers>.innerLayers>span{
+.layers>.innerLayers>span{
     padding: .5rem;
 
 }
-.info>.layers>.innerLayers>span:hover{
+.layers>.innerLayers>span:hover{
     background-color: var(--primary);
     border-radius: 5px;
     cursor: pointer;
 }
 
-.info>.layers>.innerLayers>span.active {
+.layers>.innerLayers>span.active {
   background:   var(--borderColor);
   color: white;
 }
