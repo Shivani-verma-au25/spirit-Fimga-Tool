@@ -253,7 +253,7 @@ main{
     color: var(--secondo);
     color: black;
 }
-.savecontainer #pdf{
+.savecontainer #remove{
     font-weight: 700;
     padding-inline: 1rem;
     padding-block: .5rem;

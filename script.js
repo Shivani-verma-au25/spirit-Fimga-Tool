@@ -539,6 +539,13 @@ function loadAllSavedData() {
 
 
 
+// clear canvas
+function clearAllCanvasStoredData(){
+    localStorage.removeItem('design');
+    canvasarea.innerHTML = ""
+    alert("Desgin deleted")
+}
+
 // download as pdf
 
 function downloadAsPDF(){
@@ -577,6 +584,7 @@ document.querySelector('.left' ,alignLeft);
 document.querySelector('.right' ,alignRight);
 document.querySelector('.center' ,aligneCenter);
 document.querySelector('#save').addEventListener('click' ,daveData);
+document.querySelector('#remove').addEventListener('click' ,clearAllCanvasStoredData);
 window.onload=()=>{
     loadAllSavedData();
 };
