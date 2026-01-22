@@ -16,7 +16,7 @@ html,body{
     --padding:.7rem;
     --overTextclr:#d3d3d3;
     --textSizebase:1.1rem;
-    --textSizeSmall:1rem;
+    --textSizeSmall:.7rem;
     --borderColor:#3b82f6;
     --third: #2563eb
 }
@@ -44,6 +44,9 @@ main{
 }
 .toolside{
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .logo>img{
@@ -230,3 +233,38 @@ main{
     background-color:white ;
 }
 
+
+
+/* save button */
+
+.savecontainer{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.savecontainer #save{
+    font-weight: 700;
+    padding-inline: 1rem;
+    padding-block: .5rem;
+    font-size: var(--textSizeSmall);
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    color: var(--secondo);
+    color: black;
+}
+.savecontainer #pdf{
+    font-weight: 700;
+    padding-inline: 1rem;
+    padding-block: .5rem;
+    font-size: var(--textSizeSmall);
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    color: var(--secondo);
+    color: black;
+}
+.savecontainer #save:hover ,.savecontainer #pdf:hover {
+    background-color: var(--overTextclr);
+    transition: all .3s ease;
+}

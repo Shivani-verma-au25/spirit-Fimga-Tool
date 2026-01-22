@@ -177,7 +177,7 @@ function creatFrame (){
 
 
 //canvas  deselecte elements
-canvasarea.addEventListener('mousedown',()=>{
+canvasarea.addEventListener('mousedown',(e)=>{
     if (e.target !== canvasarea) return;
 
     document.querySelectorAll('.selected').forEach((e)=>{
@@ -187,7 +187,7 @@ canvasarea.addEventListener('mousedown',()=>{
     removeReSizeClass()
     selectedElement = null
     selectedElementId = null
-    createRectangle();
+    // createRectangle();
 })
 
 
@@ -212,6 +212,7 @@ function createTextElement(){
         txt.style.padding = '4px';
         txt.style.border = 'none';
         txt.style.color = 'white'
+        txt.style.backgroundColor = 'black'
         txt.style.zIndex = 99
         // update layers array
         layers.push({
@@ -471,20 +472,113 @@ function pickColor(){
 }
 
 
+// save all data
+function getDataFromApp() {
+    const data = [];
+
+    canvasarea.querySelectorAll('[data-id]').forEach(elm => {
+        data.push({
+            id: elm.dataset.id,
+            type: elm.dataset.type,
+            text: elm.innerText,
+            style: {
+                top: elm.style.top,
+                left: elm.style.left,
+                width: elm.style.width,
+                height: elm.style.height,
+                color: elm.style.color,
+                backgroundColor: elm.style.backgroundColor,
+                textAlign: elm.style.textAlign,
+                fontSize: elm.style.fontSize,
+            }
+        });
+    });
+
+    return data;
+}
+
+// save fnction
+function daveData(){
+    const savedata = getDataFromApp()
+    if (savedata.length ===0) {
+         alert("Nothing to save");
+         return;
+    }
+    localStorage.setItem('design',JSON.stringify(savedata))
+    alert('Design Saved')
+}
 
 
+
+// load all data from localstorage
+
+function loadAllSavedData() {
+    const savedData = JSON.parse(localStorage.getItem('design'));
+    if (!savedData) return;
+
+    canvasarea.innerHTML = '';
+
+    savedData.forEach((sData) => {
+        const element = document.createElement('div');
+
+        // restore dataset
+        element.dataset.id = sData.id;
+        element.dataset.type = sData.type;
+
+        // restore text
+        element.innerText = sData.text || '';
+
+        // restore styles
+        element.style.position = 'absolute';
+        Object.assign(element.style, sData.style);
+
+        canvasarea.appendChild(element);
+        dragElemt(element);
+    });
+}
+
+
+
+// download as pdf
+
+function downloadAsPDF(){
+    const pdf = document.createElement('div');
+    html2pdf()
+      .from(pdf)
+      .set({
+        margin: 0,
+        filename: 'design.pdf',
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          backgroundColor: '#ffffff'
+        },
+        jsPDF: {
+          unit: 'px',
+          format: 'a4',
+          orientation: 'portrait'
+        }
+      })
+      .save();
+
+}
 
 
 
 
 // calling functions
 // calling create rectanlge function
-document.getElementById('rect').addEventListener('click' , createRectangle)
+document.getElementById('rect').addEventListener('click' , createRectangle);
 // calling create frame function
-document.getElementById('frame').addEventListener('click' , creatFrame)
+document.getElementById('frame').addEventListener('click' , creatFrame);
 // calling create text function
-document.getElementById('text').addEventListener('click' , createTextElement)
-document.querySelector('.left' ,alignLeft)
-document.querySelector('.right' ,alignRight)
-document.querySelector('.center' ,aligneCenter)
-openPallet()
+document.getElementById('text').addEventListener('click' , createTextElement);
+document.querySelector('.left' ,alignLeft);
+document.querySelector('.right' ,alignRight);
+document.querySelector('.center' ,aligneCenter);
+document.querySelector('#save').addEventListener('click' ,daveData);
+window.onload=()=>{
+    loadAllSavedData();
+};
+openPallet();
+// document.querySelector('.savecontainer #pdf').addEventListener("click",downloadAsPDF)
