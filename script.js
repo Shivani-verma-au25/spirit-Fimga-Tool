@@ -459,13 +459,22 @@ function openPallet(){
 function pickColor(){
     document.querySelectorAll('.palette button').forEach((btn) =>{
        const color = btn.dataset.color;
-        btn.style.backgroundColor = color
+        btn.style.backgroundColor = color;
+        btn.style.color = color;
         
         btn.onclick = (e)=>{
-            if (!selectedElement) {
+            if (!selectedElement || !selectedTextelm) {
                 return;
             }
-            selectedElement.style.backgroundColor = color;
+            if (selectedElement) {
+                selectedElement.style.backgroundColor = color;
+                selectedElement.style.color = white;
+            }
+
+            if (selectTextElement) {
+                selectedElement.style.color = color;
+                selectedElement.style.backgroundColor = color;
+            }
         }
 
     })
